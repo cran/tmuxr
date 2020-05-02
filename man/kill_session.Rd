@@ -2,13 +2,16 @@
 % Please edit documentation in R/session.R
 \name{kill_session}
 \alias{kill_session}
-\title{Kill a session.}
+\title{Kill a tmux session}
 \usage{
-kill_session(session)
+kill_session(target, inverse = FALSE)
 }
 \arguments{
-\item{session}{A \code{tmuxr_session}.}
+\item{target}{A tmuxr_session.}
+
+\item{inverse}{A logical. If \code{TRUE}, kills all but the \code{target} session.
+Default: \code{FALSE}.}
 }
 \description{
-Kill a session.
+Kill a tmux session
 }

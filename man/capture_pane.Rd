@@ -2,32 +2,46 @@
 % Please edit documentation in R/pane.R
 \name{capture_pane}
 \alias{capture_pane}
-\title{Capture contents of a pane.}
+\title{Capture the contents of a tmux pane}
 \usage{
-capture_pane(target, start = NULL, end = NULL, trim = FALSE,
-  trim_top = trim, trim_bottom = trim, strip_lonely_prompt = TRUE,
-  as_message = FALSE, in_viewer = FALSE)
+capture_pane(
+  target = NULL,
+  start = NULL,
+  end = NULL,
+  escape = FALSE,
+  escape_control = FALSE,
+  join = FALSE,
+  cat = FALSE
+)
 }
 \arguments{
-\item{target}{A session, window, or pane.}
+\item{target}{A tmuxr_session, tmuxr_window, or tmuxr_pane. If \code{NULL},
+the currently active pane is used. Default: \code{NULL}.}
 
-\item{start}{Numeric. First line to capture.}
+\item{start, end}{An integer or a dash (\code{-}). First and last lines to
+capture. \code{0} is the first line of the visible pane and negative integers
+are lines in the history. A dash (\code{-}) for \code{start} is the start of the
+history and to \code{end} the end of the visible pane. The default is to
+capture only the visible contents of the pane.}
 
-\item{end}{Numeric. Last line to capture.}
+\item{escape}{A logical. If \code{TRUE}, include escape sequences for text and
+background attributes. Default: \code{FALSE}.}
 
-\item{trim}{Logical. Should empty lines be removed from the top and bottom?}
+\item{escape_control}{A logical. If \code{TRUE}, also escape control characters
+as octal \\xxx. Default: \code{FALSE}.}
 
-\item{trim_top}{Logical. Should empty lines be removed from the top?}
+\item{join}{A logical. If \code{TRUE}, join wrapped lines and preserve trailing
+spaces at each line. Default: \code{FALSE}.}
 
-\item{trim_bottom}{Logical. Should empty lines be removed from the bottom?}
-
-\item{strip_lonely_prompt}{Logical. Should lines containing only the prompt
-be removed?}
-
-\item{as_message}{Logical. Should the contents be displayed as a message?}
-
-\item{in_viewer}{Logical. Should the contents be displayed in the viewer?}
+\item{cat}{A logical. If \code{TRUE}, concatenate lines into one string.
+Default: \code{FALSE}.}
+}
+\value{
+A vector of strings or one string when \code{cat} is \code{TRUE}.
 }
 \description{
-Capture contents of a pane.
+Capture the contents of a tmux pane
+}
+\seealso{
+\code{\link[=send_keys]{send_keys()}}
 }

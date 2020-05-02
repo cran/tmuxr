@@ -2,18 +2,31 @@
 % Please edit documentation in R/pane.R
 \name{pipe_pane}
 \alias{pipe_pane}
-\title{Pipe contents of a pane to a shell command.}
+\title{Pipe contents of a tmux pane to a shell command}
 \usage{
-pipe_pane(target = NULL, shell_command = NULL, open = FALSE)
+pipe_pane(
+  target = NULL,
+  shell_command = NULL,
+  stdout = TRUE,
+  stdin = FALSE,
+  open = FALSE
+)
 }
 \arguments{
-\item{target}{A session, window, or pane.}
+\item{target}{A tmuxr_session, tmuxr_window, or tmuxr_pane.}
 
-\item{shell_command}{String. System command to be invoked when creating the
-session.}
+\item{shell_command}{String. If \code{NULL}, the current pipe (if any) is closed.
+Default: \code{NULL}.}
 
-\item{open}{Logical. Only open a new pipe if no previous pipe exists.}
+\item{stdout}{Logical. Connect standard output of pane to \code{shell_command}?
+Default: \code{TRUE}.}
+
+\item{stdin}{Logical. Connect standard input of pane to \code{shell_command}?
+Default: \code{FALSE}.}
+
+\item{open}{Logical. Only open a new pipe if no previous pipe exists.
+Default: \code{FALSE}.}
 }
 \description{
-Pipe contents of a pane to a shell command.
+Pipe contents of a tmux pane to a shell command
 }

@@ -1,77 +1,54 @@
-#' Send keys to a session, window, or pane.
+#' Send keys to a tmux pane
 #'
-#' @param target A session, window, or pane.
-#' @param keys String to send.
-#' @param literal Should the keys be interpreted literally?
+#' @param target A tmuxr_session, tmuxr_window, or tmuxr_pane. If `NULL`,
+#'   the currently active pane is used. Default: `NULL`.
+#' @param ... Strings. Keys to send.
+#' @param literal A logical. If `TRUE`, key name lookup is disabled and the keys
+#'   are processed as literal UTF-8 characters. Default: `FALSE`.
+#' @param count An integer. Number of times the keys are sent. Default: `1L`.
 #'
-#' @export
-send_keys <- function(target, keys, literal = FALSE) {
-  args <- c("-t", target$name)
-  if (literal) args <- c(args, "-l")
-  args <- c(args, shQuote(keys))
-  tmux_send_keys(args)
-  invisible(target)
-}
-
-
-#' Send the Enter key to a session, window or pane.
+#' @seealso [capture_pane()]
 #'
-#' @param target A session, window, or pane.
-#'
-#' @export
-send_enter <- function(target) {
-  tmux_send_keys("-t", target$name, "Enter")
-  invisible(target)
-}
-
-
-#' Send the Control C combination to a session, window or pane.
-#'
-#' @param target A session, window, or pane.
+#' @examples
+#' s <- new_session(shell_command = "cat")
+#' send_keys(s, "Speak", "Space", "friend")
+#' send_keys(s, "BSpace", count = 6L)
+#' send_keys(s, "mellon and ")
+#' send_keys(s, "enter", "!", literal = TRUE)
+#' send_keys(s, "enter", literal = FALSE)
+#' capture_pane(s, start = 0L, end = 1L)
+#' kill_session(s)
 #'
 #' @export
-send_control_c <- function(target) {
-  tmux_send_keys("-t", target$name, "C-c")
-  invisible(target)
-}
+send_keys <- function(target = NULL, ..., literal = FALSE, count = 1L) {
+  flags <- c()
+  if (literal) flags <- c(flags, "-l")
+  if (!is.null(target)) flags <- c(flags, "-t", get_target(target))
 
-
-#' Send the Backspace key to a session, window or pane.
-#'
-#' @param target A session, window, or pane.
-#'
-#' @export
-send_backspace <- function(target) {
-  tmux_send_keys("-t", target$name, "BSpace")
-  invisible(target)
-}
-
-
-#' Send multiple lines to a session, window, or pane.
-#'
-#' @param target A session, window, or pane.
-#'
-#' @param lines A character vector.
-#' @param wait Should there be waited for the prompt after sending each line?
-#'
-#' @export
-send_lines <- function(target, lines, wait = TRUE) {
-  for (line in lines) {
-    send_keys(target, line, literal = TRUE)
-    send_enter(target)
-    if (wait) wait_for_prompt(target)
+  if (tmux_version() < 2.4) {
+    flags <- c(flags, ...)
+    for (i in seq(count)) tmux_command("send-keys", flags)
+  } else {
+    flags <- c(flags, "-N", count, ...)
+    tmux_command("send-keys", flags)
   }
+
   invisible(target)
 }
 
 
-#' Wait.
+#' Send prefix to a tmux pane
 #'
-#' @param target A session, window, or pane.
-#' @param time Numerical. Time to wait in seconds between tries.
-
+#' @param target A tmuxr_session, tmuxr_window, or tmuxr_pane. If `NULL`,
+#'   the currently active pane is used. Default: `NULL`.
+#' @param secondary A logical. If `TRUE`, send secondary prefix. Default:
+#'   `NULL`.
 #' @export
-wait <- function(target, time = 0.05) {
-  Sys.sleep(time)
+send_prefix <- function(target = NULL, secondary = FALSE) {
+  flags <- c()
+  if (secondary) flags <- c(flags, "-2")
+  if (!is.null(target)) flags <- c(flags, "-t", get_target(target))
+
+  tmux_command("send-prefix", flags)
   invisible(target)
 }

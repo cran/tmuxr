@@ -2,10 +2,13 @@
 % Please edit documentation in R/server.R
 \name{is_installed}
 \alias{is_installed}
-\title{Is tmux installed?}
+\title{Is tmux installed correctly?}
 \usage{
 is_installed()
 }
+\value{
+A logical.
+}
 \description{
-Is tmux installed?
+Check whether tmux is installed correctly
 }

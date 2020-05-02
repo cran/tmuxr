@@ -2,18 +2,19 @@
 % Please edit documentation in R/session.R
 \name{attach_session}
 \alias{attach_session}
-\title{Attach to an existing tmux session.}
+\title{Attach to an existing tmux session}
 \usage{
-attach_session(name, prompt = NULL)
+attach_session(x, lookup_id = TRUE)
 }
 \arguments{
-\item{name}{Numeric or string indicating the name of the existing session.}
+\item{x}{An integer or string indicating the name of an existing window.}
 
-\item{prompt}{String containing a regular expression.}
+\item{lookup_id}{A logical. If \code{FALSE}, \code{x} is assumed to be a session id.
+Default: \code{TRUE}.}
 }
 \value{
-A \code{tmuxr_session}.
+A tmuxr_session.
 }
 \description{
-Attach to an existing tmux session.
+Attach to an existing tmux session
 }

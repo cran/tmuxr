@@ -6,6 +6,9 @@
 \usage{
 is_running()
 }
+\value{
+A logical.
+}
 \description{
-Is the tmux server running?
+Check whether the tmux server is running.
 }
