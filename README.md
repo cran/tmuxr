@@ -3,6 +3,8 @@
 
 # tmuxr <img src="man/figures/logo.png" align="right" width="100px" />
 
+[![R build
+status](https://github.com/datascienceworkshops/tmuxr/workflows/R-CMD-check/badge.svg)](https://github.com/datascienceworkshops/tmuxr/actions)
 [![Travis-CI build
 status](https://travis-ci.org/datascienceworkshops/tmuxr.svg?branch=master)](https://travis-ci.org/datascienceworkshops/tmuxr)
 [![codecov](https://codecov.io/gh/datascienceworkshops/tmuxr/branch/master/graph/badge.svg)](https://codecov.io/gh/datascienceworkshops/tmuxr)
@@ -33,17 +35,20 @@ learn more about what `tmuxr` has to offer.
 
 ## Installation
 
-The development version of `tmuxr` can be installed with:
+`tmuxr` is available through CRAN and can be installed with
+`install.packages("tmuxr")`. The package is under active development
+though and the latest set of features can be obtained by installing from
+this repository using `devtools`:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("datascienceworkshops/tmuxr")
+# install.packages("devtools")
+devtools::install_github("datascienceworkshops/tmuxr")
 ```
 
 ## Compatibility
 
 We [regularly test](https://travis-ci.org/datascienceworkshops/tmuxr)
-`tmuxr` on Ubuntu with tmux versions 2.1 through 3.1 and on macOS with
+`tmuxr` on Ubuntu with tmux versions 2.1 through 3.1b and on macOS with
 the latest version of tmux provided by Homebrew. `tmuxr` might work on
 Windows using Cygwin or WSL, but we haven’t tested this.
 

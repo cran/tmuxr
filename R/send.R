@@ -10,6 +10,7 @@
 #' @seealso [capture_pane()]
 #'
 #' @examples
+#' \dontrun{
 #' s <- new_session(shell_command = "cat")
 #' send_keys(s, "Speak", "Space", "friend")
 #' send_keys(s, "BSpace", count = 6L)
@@ -18,6 +19,7 @@
 #' send_keys(s, "enter", literal = FALSE)
 #' capture_pane(s, start = 0L, end = 1L)
 #' kill_session(s)
+#' }
 #'
 #' @export
 send_keys <- function(target = NULL, ..., literal = FALSE, count = 1L) {
@@ -25,11 +27,16 @@ send_keys <- function(target = NULL, ..., literal = FALSE, count = 1L) {
   if (literal) flags <- c(flags, "-l")
   if (!is.null(target)) flags <- c(flags, "-t", get_target(target))
 
-  if (tmux_version() < 2.4) {
-    flags <- c(flags, ...)
-    for (i in seq(count)) tmux_command("send-keys", flags)
+  if (count > 1L) {
+    if (tmux_version() < 2.4) {
+      flags <- c(flags, ...)
+      for (i in seq(count)) tmux_command("send-keys", flags)
+    } else {
+      flags <- c(flags, "-N", count, ...)
+      tmux_command("send-keys", flags)
+    }
   } else {
-    flags <- c(flags, "-N", count, ...)
+    flags <- c(flags, ...)
     tmux_command("send-keys", flags)
   }
 
@@ -42,7 +49,8 @@ send_keys <- function(target = NULL, ..., literal = FALSE, count = 1L) {
 #' @param target A tmuxr_session, tmuxr_window, or tmuxr_pane. If `NULL`,
 #'   the currently active pane is used. Default: `NULL`.
 #' @param secondary A logical. If `TRUE`, send secondary prefix. Default:
-#'   `NULL`.
+#'   `FALSE`.
+#'
 #' @export
 send_prefix <- function(target = NULL, secondary = FALSE) {
   flags <- c()
