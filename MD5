@@ -1,7 +1,7 @@
-3908d932e9a36dd0873e920af7fb4bef *DESCRIPTION
+ffddbc7de1d548031735e7b40833f633 *DESCRIPTION
 8380d14d43723ae5740858079815dad8 *LICENSE
 5fc3f21209105f6b4851bc05aa49b49c *NAMESPACE
-49e2e8c32a152f92b92e040dee97367d *NEWS.md
+f76df30aae6986cbc27b4faebefdf85f *NEWS.md
 452c154c3ec1353b6270733186e725eb *R/inspect.R
 588707ce5a51b9cf8a87702573d4fecb *R/layout.R
 1a8d6cdd8c04e4b462c1c46e3ba6cf9f *R/pane.R
@@ -12,13 +12,14 @@ a6f4a86d2a6bf127faed1581d9288c9c *R/send.R
 e0ef681901465d24f47f9139cb2c086a *R/tmuxr-package.R
 cc46db64c4ffdadde3c9e58cc0bee93f *R/utils.R
 d552e9b434d0bf58c4780ac84ad22946 *R/window.R
-2d353bcffdaaa57c82d87ec2ac723d91 *README.md
+9c275d8490cfc0dada0833425126e961 *README.md
 d7ad573ee7f76dcaaea16b3607812e51 *man/attach_pane.Rd
 0954fb67ea35378320910ff446e30429 *man/attach_session.Rd
 e66080dd2b046727b3c2570cf8a4c6cf *man/attach_window.Rd
 6544adaa9d271f828b0daddfa4b0d8df *man/capture_pane.Rd
 ed8deae551649e2581af43f9a01d67dd *man/clock_mode.Rd
 08e7fbc0d376ca8f278d28bdf15ec483 *man/display_message.Rd
+e9b400c972330aa9ef6e4e3dad35d0bd *man/figures/demo.png
 f87ee5217560bf2cd32641afaa24436e *man/figures/logo.png
 403364bf444bd89014832a4f79d2a42a *man/figures/logo.svg
 a7f32f8f0a7381e54caec615d595d7bf *man/figures/tmuxr.ai
@@ -60,8 +61,8 @@ e00a3f46421cf366a49c3a92aa9254ef *man/style_convert.Rd
 7a38fb1429d6e9319d1ff1189d78a798 *man/tmux_version.Rd
 3f3e206e4fa9cb463e2fc542af04f0b3 *man/tmuxr-package.Rd
 f14869985b72b68ad20c2c5105899eb1 *tests/testthat.R
-281c550e8f754ea7663309eecdb7aa9d *tests/testthat/setup-tmuxr.R
-1eff2275e5ec9350b45998e236e7a535 *tests/testthat/teardown-tmuxr.R
+21c980553c95e1953114a73c17c5f95f *tests/testthat/setup-tmuxr.R
+d69895f68acc478ff42622f44d09580a *tests/testthat/teardown-tmuxr.R
 1181cfd88b1c8c44c730e20dd3b9106c *tests/testthat/test-pane.R
 58950aa1c6eda2dc01b79b2ea106cf53 *tests/testthat/test-select.R
 fa70ad387f3db24f7e78aa84fa93eeb6 *tests/testthat/test-send.R
